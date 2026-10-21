@@ -1,0 +1,68 @@
+{
+  "name": "Handle Errors and Notify via Telegram",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "7491e00f-34dc-4118-896f-54b0b094cd31",
+      "name": "TriggerError"
+    },
+    {
+      "parameters": {
+        "chatId": "YOUR_TELEGRAM_CHAT_ID",
+        "text": "=   🚨 Workflow failed: {{ $json.workflow.name }}\n   Node: {{ $json.execution.lastNodeExecuted }}\n   Error: {{ $json.execution.error.message }}\n   Execution: {{ $json.execution.url }}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "disable_web_page_preview": true
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        240,
+        0
+      ],
+      "id": "f0c2cf06-f1c9-47bf-96a7-0e7907da8bd4",
+      "name": "SendMessageToFailBot",
+      "webhookId": "c6efa2af-9b3f-49d8-adb4-4e83b033fa85",
+      "credentials": {
+        "telegramApi": {
+          "id": "kQg8ybXwYlmEiwdc",
+          "name": "TelegramErrorAlertsBot"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "TriggerError": {
+      "main": [
+        [
+          {
+            "node": "SendMessageToFailBot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "c4892d3b-41b2-4c1f-b218-8fd75e1c9988",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "104ea615d2c0013fd09f36af2788f7936dd2f0ca35fed657631a5f93bf9bc0a5"
+  },
+  "nodeGroups": [],
+  "id": "SzBr1IkTb4wbqFMN",
+  "tags": []
+}
